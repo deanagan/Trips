@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Trips.Data;
+
 namespace Trips
 {
     public class Startup
@@ -28,6 +30,8 @@ namespace Trips
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddTransient<ITripService, TripService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
