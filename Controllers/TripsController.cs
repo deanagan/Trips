@@ -12,6 +12,13 @@ namespace Trips.Controllers
             this._service = service;
         }
 
+        [HttpDelete("[action]/{id}")]
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return Ok();
+        }
+
         [HttpPut("[action]/{id}")]
         public IActionResult Update(int id, [FromBody]Trip trip)
         {

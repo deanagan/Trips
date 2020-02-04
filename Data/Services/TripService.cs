@@ -12,7 +12,11 @@ namespace Trips.Data
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var tripToDelete = Data.Trips.FirstOrDefault(n => n.Id == id);
+            if (tripToDelete != null)
+            {
+                Data.Trips.Remove(tripToDelete);
+            }
         }
 
         public Trip Read(int id)
