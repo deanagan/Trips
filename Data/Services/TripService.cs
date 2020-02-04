@@ -25,7 +25,15 @@ namespace Trips.Data
 
         public void Update(int id, Trip trip)
         {
-            throw new System.NotImplementedException();
+            var tripToUpdate = Data.Trips.FirstOrDefault(n => n.Id == id);
+
+            if (tripToUpdate != null)
+            {
+                tripToUpdate.Name = trip.Name;
+                tripToUpdate.Description = trip.Description;
+                tripToUpdate.DateStarted = trip.DateStarted;
+                tripToUpdate.DateCompleted = trip.DateCompleted;
+            }
         }
     }
 }
