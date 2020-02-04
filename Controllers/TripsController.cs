@@ -12,6 +12,12 @@ namespace Trips.Controllers
             this._service = service;
         }
 
+        [HttpGet("[action]")]
+        public IActionResult ReadAll()
+        {
+            return Ok(_service.ReadAll());
+        }
+
         [HttpPost("Create")]
         public IActionResult Create([FromBody]Trip trip)
         {

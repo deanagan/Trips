@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Trips.Data
 {
@@ -19,10 +20,8 @@ namespace Trips.Data
             throw new System.NotImplementedException();
         }
 
-        public List<Trip> ReadAll()
-        {
-            throw new System.NotImplementedException();
-        }
+        public List<Trip> ReadAll() => Data.Trips.ToList();
+        
 
         public void Update(int id, Trip trip)
         {
