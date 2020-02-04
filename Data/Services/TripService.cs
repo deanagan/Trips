@@ -6,7 +6,7 @@ namespace Trips.Data
     {
         public void Create(Trip trip)
         {
-            throw new System.NotImplementedException();
+            Data.Trips.Add(trip);
         }
 
         public void Delete(int id)
