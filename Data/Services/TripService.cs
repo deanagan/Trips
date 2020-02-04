@@ -19,10 +19,8 @@ namespace Trips.Data
             }
         }
 
-        public Trip Read(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Trip Read(int id) => Data.Trips.FirstOrDefault(n => n.Id == id);
+        
 
         public List<Trip> ReadAll() => Data.Trips.ToList();
         

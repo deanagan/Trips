@@ -32,6 +32,13 @@ namespace Trips.Controllers
             return Ok(_service.ReadAll());
         }
 
+        [HttpGet("[action]/{id}")]
+        public IActionResult Read(int id)
+        {
+            var trip = _service.Read(id);
+            return Ok(trip);
+        }
+
         [HttpPost("[action]")]
         public IActionResult Create([FromBody]Trip trip)
         {
