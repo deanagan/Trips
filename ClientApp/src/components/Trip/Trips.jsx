@@ -5,7 +5,7 @@ export class Trips extends Component
 {
     constructor(props) {
         super(props);
-
+        this.onTripUpdate = this.onTripUpdate.bind(this);
         this.state = {
             trips: [],
             loading: true
@@ -21,6 +21,11 @@ export class Trips extends Component
 
     componentDidMount() {
         this.populateData();
+    }
+
+    onTripUpdate(id) {
+        const {history} = this.props;
+        history.push('/update/'+id);
     }
 
     renderAllTripsTable(trips) {
@@ -41,9 +46,13 @@ export class Trips extends Component
                             <tr key={trip.id}>
                                 <td>{trip.name}</td>
                                 <td>{trip.description}</td>
-                                <td>{new Date(trip.dateStarted).toLocaleDateString()}</td>
-                                <td>{trip.dateCompleted ? new Date(trip.dateCompleted).toLocaleDateString() : '-'}</td>
-                                <td>-</td>
+                                <td>{new Date(trip.dateStarted).toISOString().slice(0,10)}</td>
+                                <td>{trip.dateCompleted ? new Date(trip.dateCompleted).toISOString().slice(0,10) : '-'}</td>
+                                <td>
+                                    <div className="form-group">
+                                        <button onClick={() => this.onTripUpdate(trip.id)} className="btn btn-success">Update</button>
+                                    </div>
+                                </td>
                             </tr>
                         ))
                     }
