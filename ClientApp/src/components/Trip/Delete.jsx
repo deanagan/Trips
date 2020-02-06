@@ -24,8 +24,8 @@ export class Delete extends Component {
             this.setState({
                 name:response.name,
                 description: response.description,
-                dateStarted: new Date(response.dateStarted).toISOString().slice(0,10),
-                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toISOString().slice(0,10) : '-'
+                dateStarted: new Date(response.dateStarted).toLocaleDateString().slice(0,10),
+                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toLocaleDateString().slice(0,10) : '-'
             })
         });
     }

@@ -29,8 +29,8 @@ export class Update extends Component {
             this.setState({
                 name:response.name,
                 description: response.description,
-                dateStarted: new Date(response.dateStarted).toISOString().slice(0,10),
-                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toISOString().slice(0,10) : '-'
+                dateStarted: new Date(response.dateStarted).toLocaleDateString().slice(0,10),
+                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toLocaleDateString().slice(0,10) : '-'
             })
         });
     }
@@ -93,7 +93,7 @@ export class Update extends Component {
                         <input type="text" className="form-control" value={this.state.description}
                         onChange={this.onChangeDescription}/>
                     </div>
-                    
+
                     <div className="row">
                         <div className="col col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
@@ -101,19 +101,19 @@ export class Update extends Component {
                                 <input type="date" className="form-control" value={this.state.dateStarted}
                                 onChange={this.onChangeStartDate}/>
                             </div>
-                        </div>                        
+                        </div>
                         <div className="col col-md-6 col-sm-6 col-xs-12">
                             <div className="form-group">
                                 <label>Date Completed: </label>
                                 <input type="date" className="form-control" value={this.state.dateCompleted}
                                 onChange={this.onChangeCompletedDate}/>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div className="form-group">
                         <button onClick={this.onUpdateCancel} className="btn btn-default">Cancel</button>
                         <button type="submit" className="btn btn-success">Update</button>
-                        
+
                     </div>
                 </form>
 
