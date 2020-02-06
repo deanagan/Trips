@@ -3,8 +3,9 @@ import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 
-import { Trips } from './components/Trip/Trips'
-import { Create } from './components/Trip/Create'
+import { Trips } from './components/Trip/Trips';
+import { Create } from './components/Trip/Create';
+import { Update } from './components/Trip/Update';
 import './custom.css'
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/create' component={Create} />
         <Route path='/trips' component={Trips} />
+        <Route path='/update/:id' component={Update} />
       </Layout>
     );
   }
