@@ -6,6 +6,7 @@ export class Trips extends Component
     constructor(props) {
         super(props);
         this.onTripUpdate = this.onTripUpdate.bind(this);
+        this.onTripDelete = this.onTripDelete.bind(this);
         this.state = {
             trips: [],
             loading: true
@@ -26,6 +27,11 @@ export class Trips extends Component
     onTripUpdate(id) {
         const {history} = this.props;
         history.push('/update/'+id);
+    }
+
+    onTripDelete(id) {
+        const {history} = this.props;
+        history.push('/delete/'+id);
     }
 
     renderAllTripsTable(trips) {
@@ -51,6 +57,9 @@ export class Trips extends Component
                                 <td>
                                     <div className="form-group">
                                         <button onClick={() => this.onTripUpdate(trip.id)} className="btn btn-success">Update</button>
+                                    </div>
+                                    <div className="form-group">
+                                        <button onClick={() => this.onTripDelete(trip.id)} className="btn btn-danger">Delete</button>
                                     </div>
                                 </td>
                             </tr>
