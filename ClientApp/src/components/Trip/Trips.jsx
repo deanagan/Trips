@@ -9,14 +9,18 @@ export class Trips extends Component
         this.onTripDelete = this.onTripDelete.bind(this);
         this.state = {
             trips: [],
-            loading: true
+            loading: true,
+            failed: false,
+            error: ''
         }
     }
 
     populateData() {
         axios.get("api/Trips/ReadAll").then(result => {
             const response = result.data;
-            this.setState({trips: response, loading: false});
+            this.setState({trips: response, loading: false, failed:false, error:''});
+        }).catch(error => {
+            this.setState({trips: [], loading: false, failed:true, error:'Unable to load any trip.'});
         });
     }
 
@@ -77,7 +81,13 @@ export class Trips extends Component
                 <em>Loading trips..</em>
             </p>
         ) : (
-            this.renderAllTripsTable(this.state.trips)
+            this.state.failed ? (
+            <div className="text-danger">
+                <em>{this.state.error}</em>
+            </div>) : 
+            
+            (this.renderAllTripsTable(this.state.trips))
+            
         )
         return (
             <div>
