@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Trips.Data;
 
@@ -22,21 +23,36 @@ namespace Trips.Controllers
         [HttpPut("[action]/{id}")]
         public IActionResult Update(int id, [FromBody]Trip trip)
         {
-            _service.Update(id, trip);
-            return Ok();
+            try
+            {
+                _service.Update(id, trip);
+                return Ok();
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("[action]")]
         public IActionResult ReadAll()
         {
-            return Ok(_service.ReadAll());
+            try
+            {
+                return Ok(_service.ReadAll());
+            } catch(Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("[action]/{id}")]
         public IActionResult Read(int id)
         {
-            var trip = _service.Read(id);
-            return Ok(trip);
+            try
+            {
+                return Ok(_service.Read(id));
+            } catch(Exception ex) {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost("[action]")]
@@ -45,9 +61,12 @@ namespace Trips.Controllers
             if (trip != null)
             {
                 _service.Create(trip);
+                return Ok();
             }
+            
+            return BadRequest("Trip creation failed.");
 
-            return Ok();
+            
         }
     }
 }
