@@ -9,6 +9,11 @@ import { Update } from './components/Trip/Update';
 import { Delete } from './components/Trip/Delete';
 import './custom.css'
 
+// Use private route instead of route to allow
+// access only via login.
+import PrivateRoute from "./components/PrivateRoute";
+
+
 export default class App extends Component {
   static displayName = App.name;
 
@@ -17,7 +22,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/create' component={Create} />
-        <Route path='/trips' component={Trips} />
+        <Route path='/trips' component={Trips} />     
         <Route path='/update/:id' component={Update} />
         <Route path='/delete/:id' component={Delete} />
       </Layout>
