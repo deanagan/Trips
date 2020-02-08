@@ -29,8 +29,8 @@ export class Update extends Component {
             this.setState({
                 name:response.name,
                 description: response.description,
-                dateStarted: new Date(response.dateStarted).toLocaleDateString().slice(0,10),
-                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toLocaleDateString().slice(0,10) : '-'
+                dateStarted: new Date(response.dateStarted).toISOString().slice(0,10),
+                dateCompleted: response.dateCompleted ? new Date(response.dateCompleted).toISOString().slice(0,10) : '-'
             })
         });
     }
@@ -69,8 +69,8 @@ export class Update extends Component {
         let tripToUpdate = {
             name: this.state.name,
             description: this.state.description,
-            dateStarted: new Date(this.state.dateStarted).toLocaleDateString(),
-            dateCompleted: this.state.dateCompleted ? new Date(this.state.dateCompleted).toLocaleDateString() : null
+            dateStarted: new Date(this.state.dateStarted).toISOString(),
+            dateCompleted: this.state.dateCompleted ? new Date(this.state.dateCompleted).toISOString() : null
         }
 
         axios.put("api/Trips/Update/"+id, tripToUpdate).then(result => {
