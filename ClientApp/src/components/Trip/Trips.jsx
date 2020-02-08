@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+import {readAll} from '../../actions/tripActions';
+
 export class Trips extends Component
 {
     constructor(props) {
@@ -15,17 +18,14 @@ export class Trips extends Component
         }
     }
 
-    populateData() {
-        axios.get("api/Trips/ReadAll").then(result => {
-            const response = result.data;
-            this.setState({trips: response, loading: false, failed:false, error:''});
-        }).catch(error => {
-            this.setState({trips: [], loading: false, failed:true, error:'Unable to load any trip.'});
-        });
+    componentDidMount() {
+        this.props.readAll();
     }
 
-    componentDidMount() {
-        this.populateData();
+    componentDidUpdate(prevProps) {
+        if(prevProps.trips.data != this.props.trips.data) {
+            this.setState({trips: this.props.trips.data});
+        }
     }
 
     onTripUpdate(id) {
@@ -76,19 +76,17 @@ export class Trips extends Component
     }
 
     render() {
-        let content = this.state.loading ? (
+
+        let content = this.props.trips.loading ?
+        (
             <p>
-                <em>Loading trips..</em>
+                <em>Loading...</em>
             </p>
         ) : (
-            this.state.failed ? (
-            <div className="text-danger">
-                <em>{this.state.error}</em>
-            </div>) : 
-            
-            (this.renderAllTripsTable(this.state.trips))
-            
-        )
+            this.state.trips.length && this.renderAllTripsTable(this.state.trips)
+        );
+
+
         return (
             <div>
                 <h1>All trips</h1>
@@ -98,3 +96,10 @@ export class Trips extends Component
         );
     }
 }
+
+
+const mapStateToProps = ({trips}) => ({
+    trips
+})
+
+export default connect(mapStateToProps, {readAll})(Trips);
