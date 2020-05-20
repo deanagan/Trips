@@ -20,11 +20,11 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/create' component={Create} />
-        <Route path='/trips' component={Trips} />     
-        <Route path='/update/:id' component={Update} />
-        <Route path='/delete/:id' component={Delete} />
+        <PrivateRoute exact path='/' component={Home} />
+        <PrivateRoute path='/create' component={Create} />
+        <PrivateRoute path='/trips' component={Trips} />
+        <PrivateRoute path='/update/:id' component={Update} />
+        <PrivateRoute path='/delete/:id' component={Delete} />
       </Layout>
     );
   }
